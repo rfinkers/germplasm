@@ -1,4 +1,4 @@
-@prefix gpo: <http://purl.org/germplasm/ontology#>.
+@prefix g: <http://purl.org/germplasm/ontology#>.
 @prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>.
 @prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#>.
 @prefix foaf: <http://xmlns.com/foaf/0.1/> .
@@ -7,7 +7,7 @@
 @prefix dc: <http://purl.org/dc/elements/1.1/> .
 @prefix book: <http://purl.org/NET/book/vocab#> .
    
-gpo: a owl:Ontology ;
+g: a owl:Ontology ;
       dc:created "2013/12/20 12:00:00";
       dc:date "2013/12/20 12:00:00";
       dc:description """The main objective of the Germplasm Ontology is to digitize and provide persistent identifiers for the terms contained within the PGR Descriptors publications. These terms are widely used within the community of plant genetic resources, however there's a lack of clarity on how one should use them to annotate their data, which is often stored in various types of formats. By providing persistent resolvable identifiers in the form of HTTP URIs for each of these terms, alongside many examples, the Germplasm Ontology allows users to annotate their data in ways recognized by the entire community, so that they can be more easily analyzed and discovered.""" ;
@@ -20,71 +20,78 @@ gpo: a owl:Ontology ;
       foaf:authors 
         [ foaf:name "Dag Endresen"
         ];
-      dc:acknowledgments """IPGRI-INIBAP and CIRAD wish to place on record their sincere thanks to the numerous Musa workers around the world who have contributed directly or indirectly to the development of the Descriptors for banana. Mr H. Tezenas du Montcel, Mr C. Jenny and Dr X. Perrier from CIRAD-FLHOR have contributed to the development of the characterization form, which has been translated into English by Ms S. Sharrock (IBPGR) and into Spanish by Mr T. Lescot (CIRAD). Translation from French into English has been performed by Dr D.R. Jones, Ms E Arnaud and Dr J.P. Horry. Ms Adriana Alercia coordinated and supervised the text up to the pre-publication stage and provided technical advice. Ms Linda Sears edited the text and Ms Patrizia Tazza drew the cover, some illustrations, and prepared the layout. Scientific direction was provided by Dr Jean-Pierre Horry. Mr Paul Stapleton managed the production of the publication. Luca Matteis produced the underlying data model and the semantics of the ontology.""";
       foaf:page "https://code.google.com/p/germplasm/";
       rdfs:seeAlso "http://www.bioversityinternational.org/e-library/publications/categories/descriptors/"
      .
 
-gpo:Characterization a rdfs:Class;
+# brainstorming on some entities that are needed
+g:Accession a owl:Class .
+g:Environment a owl:Class .
+g:Site a owl:Class .
+g:SampleCollection a owl:Class .
+g:CharacterizationEvent a owl:Class .
+g:EvaluationEvent a owl:Class .
+
+g:Characterization a rdfs:Class;
     rdfs:label "Characterization of crops"
     .
 
-gpo:Musa a rdfs:Class;
+g:Musa a rdfs:Class;
     rdfs:label "Musa spp.";
-    rdfs:subClassOf gpo:Characterization;
+    rdfs:subClassOf g:Characterization;
     foaf:page <http://www.bioversityinternational.org/e-library/publications/detail/descriptors-for-banana-emmusaem-spp/>;
     foaf:depiction <http://www.agrobiodiversity.org/files/MusaPDF.jpg>;
     book:isbn "978-92-9043-307-1"
     .
         
-gpo:leafHabitMusa a rdf:Property;
+g:leafHabitMusa a rdf:Property;
     rdfs:label "Leaf habit"@en;
     rdfs:comment """1 Erect
 2 Intermediate
 3 Drooping
 4 Other (e.g. very drooping, specify in descriptor Notes, 6.8)"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.1.1";
+    g:section "6.1.1";
     foaf:depiction <http://www.agrobiodiversity.org/files/leafHabit.png>
     .
     
-gpo:dwarfismMusa a rdf:Property;
+g:dwarfismMusa a rdf:Property;
     rdfs:label "Dwarfism"@en;
     rdfs:comment """1 Normal: leaves not overlapped and leaf ratio inferior to 2.5
 2 Dwarf type: leaves strongly overlapped and leaf ratio superior
 to 2.5"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.1.2"
+    g:section "6.1.2"
     .
     
-gpo:pseudostemHeightMusa a rdf:Property;
+g:pseudostemHeightMusa a rdf:Property;
     rdfs:label "Pseudostem height [m]"@en;
     rdfs:comment """Recorded from the base of pseudostem to emerging point of the peduncle
 1 ≤2
 2 2.1 to 2.9
 3 ≥3"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.2.1";
+    g:section "6.2.1";
     foaf:depiction <http://www.agrobiodiversity.org/files/PseudostemSuckers.png>
     .
     
     
-gpo:pseudostemAspectMusa a rdf:Property;
+g:pseudostemAspectMusa a rdf:Property;
     rdfs:label "Pseudostem aspect"@en;
     rdfs:comment """Determined by the circumference at 100 cm
 1 Slender
 2 Normal
 3 Robust"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.2.2"
+    g:section "6.2.2"
     .
     
     
-gpo:pseudostemColourMusa a rdf:Property;
+g:pseudostemColourMusa a rdf:Property;
     rdfs:label "Pseudostem colour"@en;
     rdfs:comment """Recorded without removing the external sheaths. The colour of oldest dry sheaths should not be considered.
 1 Green-yellow
@@ -97,24 +104,24 @@ gpo:pseudostemColourMusa a rdf:Property;
 8 Blue
 9 Chimerical
 10 Other"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.2.3"
+    g:section "6.2.3"
     .
     
     
-gpo:pseudostemAppearanceMusa a rdf:Property;
+g:pseudostemAppearanceMusa a rdf:Property;
     rdfs:label "Pseudostem appearance"@en;
-    rdfs:comment """Recorded as in gpo:pseudostemColourMusa
+    rdfs:comment """Recorded as in g:pseudostemColourMusa
 1 Dull (waxy)
 2 Shiny (not waxy)"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.2.4"
+    g:section "6.2.4"
     .
     
     
-gpo:predominantUnderlyingColourPseudostemMusa a rdf:Property;
+g:predominantUnderlyingColourPseudostemMusa a rdf:Property;
     rdfs:label "Predominant underlying colour of the pseudostem"@en;
     rdfs:comment """Remove the outermost sheath from the pseudostem and look at the exposed surface
 of the underlying pseudostem. The values 5 (pink-purple), 6 (red-purple) and 7
@@ -128,60 +135,60 @@ not observed.
 6 Red-purple
 7 Purple
 8 Other"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.2.5"
+    g:section "6.2.5"
     .
     
-gpo:pigmentationUnderlyingPseudostemMusa a rdf:Property;
+g:pigmentationUnderlyingPseudostemMusa a rdf:Property;
     rdfs:label "Pigmentation of the underlying pseudostem"@en;
     rdfs:comment """Record the tinge of pigmentation, even if it is only noticeable in places.
 1 Pink-purple
 2 Red
 3 Purple
 4 Other"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.2.6"
+    g:section "6.2.6"
     .
     
     
 
-gpo:sapColourMusa a rdf:Property;
+g:sapColourMusa a rdf:Property;
     rdfs:label "Sap colour"@en;
     rdfs:comment """Cut the external sheath of pseudostem and record the characteristics of the sap.
 1 Watery
 2 Milky
 3 Red-purple
 4 Other"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.2.7"
+    g:section "6.2.7"
     .
     
     
-gpo:waxLeafSheathsMusa a rdf:Property;
+g:waxLeafSheathsMusa a rdf:Property;
     rdfs:label "Wax on leaf sheaths"@en;
     rdfs:comment """1 Very little or no visible sign of wax
 2 Very few wax
 3 Moderately waxy
 4 Very waxy"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.2.8"
+    g:section "6.2.8"
     .
     
     
-gpo:numberOfSuckersMusa a rdf:Property;
+g:numberOfSuckersMusa a rdf:Property;
     rdfs:label "Number of suckers"@en;
     rdfs:comment """Record the number of suckers from soil level to point of emergence of the last leaf
 (>30 cm height). Recorded only if no desuckering has taken place"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.2.9"
+    g:section "6.2.9"
     .
     
-gpo:developmentOfSuckersMusa a rdf:Property;
+g:developmentOfSuckersMusa a rdf:Property;
     rdfs:label "Development of suckers"@en;
     rdfs:comment """In relation to the parent plant. Observed on the tallest sucker. Recorded at harvest
 time
@@ -189,21 +196,21 @@ time
 2 More than 3/4 of the height of the parent plant
 3 Between 1/4 and 3/4 of the height of the parent plant
 4 Inhibited"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.2.10"
+    g:section "6.2.10"
     .
 
-gpo:positionOfSuckersMusa a rdf:Property;
+g:positionOfSuckersMusa a rdf:Property;
     rdfs:label "Position of suckers"@en;
     rdfs:comment """1 Far from parent plant (emerging >50 cm from parent plant)
 2 Close to parent (vertical growth)
 3 Close to parent (growing at an angle)"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.2.11"
+    g:section "6.2.11"
     .
-gpo:blotchesPetioleBaseMusa a rdf:Property;
+g:blotchesPetioleBaseMusa a rdf:Property;
     rdfs:label "Blotches at the petiole base"@en;
     rdfs:comment """Recorded on the third, fully unfolded leaf counting down from the top of the plant.
     
@@ -212,26 +219,26 @@ gpo:blotchesPetioleBaseMusa a rdf:Property;
 3 Large blotches
 4 Extensive pigmentation
 5 Without pigmentation"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.1";
+    g:section "6.3.1";
     foaf:depiction <http://www.agrobiodiversity.org/files/PetioleMidribLeaf.png>
     .
     
     
-gpo:blotchesColourMusa a rdf:Property;
+g:blotchesColourMusa a rdf:Property;
     rdfs:label "Blotches colour"@en;
     rdfs:comment """1 Brown
 2 Dark brown
 3 Brown-black
 4 Black-purple
 5 Other"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.2"
+    g:section "6.3.2"
     .
     
-gpo:petioleCanalLeafIIIMusa a rdf:Property;
+g:petioleCanalLeafIIIMusa a rdf:Property;
     rdfs:label "Petiole canal leaf III"@en;
     rdfs:comment """Leaf III is the third leaf counted from the last leaf (leaf I) produced before bunch
 emergence. Cut the petiole half way between the pseudostem and the leaf blade
@@ -242,37 +249,37 @@ and examine the cross section.
 3 Straight with erect margins
 4 Margins curved inward
 5 Margins overlapping"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.3";
+    g:section "6.3.3";
     foaf:depiction <http://www.agrobiodiversity.org/files/petioleCanalLeafIIIMusa.png>
     .
 
 
-gpo:petioleMarginsMusa a rdf:Property;
+g:petioleMarginsMusa a rdf:Property;
     rdfs:label "Petiole margins"@en;
     rdfs:comment """1 Winged and undulating
 2 Winged and not clasping the pseudostem
 3 Winged and clasping the pseudostem
 4 Not winged and clasping the pseudostem
 5 Not winged and not clasping the pseudostem"""@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.4"
+    g:section "6.3.4"
     .
 
-gpo:wingTypeMusa a rdf:Property;
+g:wingTypeMusa a rdf:Property;
     rdfs:label "Wing type"@en;
     rdfs:comment """
 1 Dry
 2 Not dry
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.5"
+    g:section "6.3.5"
     .
 
-gpo:petioleMarginColourMusa a rdf:Property;
+g:petioleMarginColourMusa a rdf:Property;
     rdfs:label "Petiole margin colour"@en;
     rdfs:comment """
 1 Green
@@ -280,36 +287,36 @@ gpo:petioleMarginColourMusa a rdf:Property;
 3 Purple to blue
 4 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.6"
+    g:section "6.3.6"
     .
 
-gpo:edgeOfPetioleMarginMusa a rdf:Property;
+g:edgeOfPetioleMarginMusa a rdf:Property;
     rdfs:label "Edge of petiole margin"@en;
     rdfs:comment """
 1 Colourless (without a colour line along)
 2 With a colour line along
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.7"
+    g:section "6.3.7"
     .
 
-gpo:petioleWarginWidthMusa a rdf:Property;
+g:petioleWarginWidthMusa a rdf:Property;
     rdfs:label "Petiole margin width"@en;
     rdfs:comment """
 1 ≤1 cm
 2 >1 cm
 3 Cannot be defined
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.8"
+    g:section "6.3.8"
     .
 
 
-gpo:leafBladeLengthMusa a rdf:Property;
+g:leafBladeLengthMusa a rdf:Property;
     rdfs:label "Leaf blade length"@en;
     rdfs:comment """
 Measured at its maximum point
@@ -318,13 +325,13 @@ Measured at its maximum point
 3 221 to 260 cm
 4 ≥261 cm
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.9"
+    g:section "6.3.9"
     .
 
 
-gpo:leafBladeWidthMusa a rdf:Property;
+g:leafBladeWidthMusa a rdf:Property;
     rdfs:label "Leaf blade width"@en;
     rdfs:comment """
 Measured at its maximum point
@@ -333,24 +340,24 @@ Measured at its maximum point
 3 81 to 90 cm
 4 ≥91 cm
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.10"
+    g:section "6.3.10"
     .
 
-gpo:leafRatioMusa a rdf:Property;
+g:leafRatioMusa a rdf:Property;
     rdfs:label "Leaf ratio"@en;
     rdfs:comment """
 3 ≤2
 5 2.4 to 2.6
 7 ≥3
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.10.1"
+    g:section "6.3.10.1"
     .
 
-gpo:petioleLengthMusa a rdf:Property;
+g:petioleLengthMusa a rdf:Property;
     rdfs:label "Petiole length"@en;
     rdfs:comment """
 Recorded from the pseudostem to the lamina
@@ -358,12 +365,12 @@ Recorded from the pseudostem to the lamina
 2 51 to 70 cm
 3 ≥71 cm
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.11"
+    g:section "6.3.11"
     .
 
-gpo:colourOfLeafUpperSurfaceMusa a rdf:Property;
+g:colourOfLeafUpperSurfaceMusa a rdf:Property;
     rdfs:label "Colour of leaf upper surface"@en;
     rdfs:comment """
 1 Green-yellow
@@ -375,23 +382,23 @@ red-purple)
 6 Blue
 7 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.12"
+    g:section "6.3.12"
     .
 
-gpo:appearanceOfLeafUpperSurfaceMusa a rdf:Property;
+g:appearanceOfLeafUpperSurfaceMusa a rdf:Property;
     rdfs:label "Appearance of leaf upper surface"@en;
     rdfs:comment """
 1 Dull
 2 Shiny
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.13"
+    g:section "6.3.13"
     .
 
-gpo:colourOfLeafLowerSurfaceMusa a rdf:Property;
+g:colourOfLeafLowerSurfaceMusa a rdf:Property;
     rdfs:label "Colour of leaf lower surface"@en;
     rdfs:comment """
 1 Green-yellow 
@@ -402,24 +409,24 @@ gpo:colourOfLeafLowerSurfaceMusa a rdf:Property;
 6 Red-purple
 7 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.14"
+    g:section "6.3.14"
     .
 
-gpo:appearanceOfLeafLowerSurfaceMusa a rdf:Property;
+g:appearanceOfLeafLowerSurfaceMusa a rdf:Property;
     rdfs:label "Appearance of leaf lower surface"@en;
     rdfs:comment """
 1 Dull
 2 Shiny
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.15"
+    g:section "6.3.15"
     .
 
 
-gpo:waxOnLeavesMusa a rdf:Property;
+g:waxOnLeavesMusa a rdf:Property;
     rdfs:label "Wax on leaves"@en;
     rdfs:comment """
 Recorded on the lower surface
@@ -428,37 +435,37 @@ Recorded on the lower surface
 3 Moderately waxy
 4 Very waxy
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.16"
+    g:section "6.3.16"
     .
 
-gpo:insertionPointOfLeafBladesOnPetioleMusa a rdf:Property;
+g:insertionPointOfLeafBladesOnPetioleMusa a rdf:Property;
     rdfs:label "Insertion point of leaf blades on petiole"@en;
     rdfs:comment """
 1 Symmetric
 2 Asymmetric
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.17"
+    g:section "6.3.17"
     .
 
 
-gpo:shapeOfLeafBladeBaseMusa a rdf:Property;
+g:shapeOfLeafBladeBaseMusa a rdf:Property;
     rdfs:label "Shape of leaf blade base"@en;
     rdfs:comment """
 1 Both sides rounded
 2 One side rounded, one pointed
 3 Both sides pointed
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.18";
+    g:section "6.3.18";
     foaf:depiction <http://www.agrobiodiversity.org/files/shapeOfLeafBladeBase.png>
     .
 
-gpo:leafCorrugationMusa a rdf:Property;
+g:leafCorrugationMusa a rdf:Property;
     rdfs:label "Leaf corrugation"@en;
     rdfs:comment """
 Presence of ridges perpendicular to the secondary ribs on the leaf upper surface
@@ -466,12 +473,12 @@ Presence of ridges perpendicular to the secondary ribs on the leaf upper surface
 2 Few stripes
 3 Very corrugated
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.19"
+    g:section "6.3.19"
     .
 
-gpo:colourOfMidribDorsalSurfaceMusa a rdf:Property;
+g:colourOfMidribDorsalSurfaceMusa a rdf:Property;
     rdfs:label "Colour of midrib dorsal surface"@en;
     rdfs:comment """
 If pigmentation is seen, options are 4, 5 or 6.
@@ -483,12 +490,12 @@ If pigmentation is seen, options are 4, 5 or 6.
 6 Purple to blue
 7 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.20"
+    g:section "6.3.20"
     .
 
-gpo:colourOfMidribVentralSurfaceMusa a rdf:Property;
+g:colourOfMidribVentralSurfaceMusa a rdf:Property;
     rdfs:label "Colour of midrib ventral surface"@en;
     rdfs:comment """
 If pigmentation is seen, options are 4, 5 or 6.
@@ -500,12 +507,12 @@ If pigmentation is seen, options are 4, 5 or 6.
 6 Purple to blue
 7 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.21"
+    g:section "6.3.21"
     .
 
-gpo:colourOfCigarLeafDorsalSurfaceMusa a rdf:Property;
+g:colourOfCigarLeafDorsalSurfaceMusa a rdf:Property;
     rdfs:label "Colour of cigar leaf dorsal surface"@en;
     rdfs:comment """
 Look at the visible face (future lower face) of the cigar leaf before it is unfurled and
@@ -514,12 +521,12 @@ before the plant flowers. (Chart A)
 2 Red-purple
 3 Other (specify in descriptor Notes, 6.8)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.22"
+    g:section "6.3.22"
     .
 
-gpo:blotchesOnLeavesOfWaterSuckersMusa a rdf:Property;
+g:blotchesOnLeavesOfWaterSuckersMusa a rdf:Property;
     rdfs:label "Blotches on leaves of water suckers"@en;
     rdfs:comment """
 Observed on young, non inhibited water suckers (if the lamina is sword shaped, it
@@ -528,14 +535,14 @@ is not a water sucker)
 2 Little or narrow blotches
 3 Large purple blotches
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.3.23"
+    g:section "6.3.23"
     .
 
 
 
-gpo:peduncleLengthMusa a rdf:Property;
+g:peduncleLengthMusa a rdf:Property;
     rdfs:label "Peduncle length"@en;
     rdfs:comment """
 Measured from the leaf crown to the first hand of fruit
@@ -543,23 +550,23 @@ Measured from the leaf crown to the first hand of fruit
 2 31 - 60 cm
 3 ≥61 cm
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.1"
+    g:section "6.4.1"
     .
 
-gpo:emptyNodesOnPeduncleMusa a rdf:Property;
+g:emptyNodesOnPeduncleMusa a rdf:Property;
     rdfs:label "Empty nodes on peduncle"@en;
     rdfs:comment """
 Record the number of empty nodes between the last bract-leaf and first hand of
 fruit
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.2"
+    g:section "6.4.2"
     .
     
-gpo:peduncleWidthMusa a rdf:Property;
+g:peduncleWidthMusa a rdf:Property;
     rdfs:label "Peduncle width"@en;
     rdfs:comment """
 Recorded at mid-length
@@ -567,12 +574,12 @@ Recorded at mid-length
 2 7 - 12 cm
 3 ≥13 cm
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.3"
+    g:section "6.4.3"
     .
 
-gpo:peduncleColourMusa a rdf:Property;
+g:peduncleColourMusa a rdf:Property;
     rdfs:label "Peduncle colour"@en;
     rdfs:comment """
 Descriptor state 4 (red/or pink-purple) is green homogeneously tinged with red
@@ -584,12 +591,12 @@ Descriptor state 4 (red/or pink-purple) is green homogeneously tinged with red
 5 With purple-brown to blue blotches
 6 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.4"
+    g:section "6.4.4"
     .
 
-gpo:peduncleHairinessMusa a rdf:Property;
+g:peduncleHairinessMusa a rdf:Property;
     rdfs:label "Peduncle hairiness"@en;
     rdfs:comment """
 1 Hairless
@@ -597,12 +604,12 @@ gpo:peduncleHairinessMusa a rdf:Property;
 3 Very hairy, short hairs (similar to velvet touch)
 4 Very hairy, long hairs (>2 mm)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.5"
+    g:section "6.4.5"
     .
 
-gpo:bunchPositionMusa a rdf:Property;
+g:bunchPositionMusa a rdf:Property;
     rdfs:label "Bunch position"@en;
     rdfs:comment """
 (Position of the fruit-bearing part). Angle from vertical to the general axis of the
@@ -613,13 +620,13 @@ bunch
 4 Horizontal
 5 Erect
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.6"
+    g:section "6.4.6"
     .
 
 
-gpo:bunchShapeMusa a rdf:Property;
+g:bunchShapeMusa a rdf:Property;
     rdfs:label "Bunch shape"@en;
     rdfs:comment """
 1 Cylindrical
@@ -629,12 +636,12 @@ gpo:bunchShapeMusa a rdf:Property;
 5 Spiral (all fruit is attached to a unique crown coiled around the
 stalk)
 """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.7"
+    g:section "6.4.7"
     .
 
-gpo:bunchAppearanceMusa a rdf:Property;
+g:bunchAppearanceMusa a rdf:Property;
     rdfs:label "Bunch appearance"@en;
     rdfs:comment """
 1 Lax (one can easily place one’s hand between the
@@ -644,12 +651,12 @@ between the hands of fruit)
 3 Very compact (one cannot place one’s finger between the hands
 of fruit)
 """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.8"
+    g:section "6.4.8"
     .
 
-gpo:flowersThatFormTheFruitMusa a rdf:Property;
+g:flowersThatFormTheFruitMusa a rdf:Property;
     rdfs:label "Flowers that form the fruit"@en;
     rdfs:comment """
 (4.2.3)
@@ -658,12 +665,12 @@ stamens
 1 Female (absence of pollen sacs or pollens)
 2 Hermaphrodite (presence of pollen sacs and pollens)
 """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.9"
+    g:section "6.4.9"
     .
 
-gpo:fruitsMusa a rdf:Property;
+g:fruitsMusa a rdf:Property;
     rdfs:label "Fruits"@en;
     rdfs:comment """
 Positioning of fruits on the crown
@@ -671,23 +678,23 @@ Positioning of fruits on the crown
 2 Biseriate
 3 Biseriate and fused
 """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.10"
+    g:section "6.4.10"
     .
 
-gpo:rachisTypeMusa a rdf:Property;
+g:rachisTypeMusa a rdf:Property;
     rdfs:label "Rachis type"@en;
     rdfs:comment """
 1 Truncated, no bract scar below the last hand of fruit
 2 Present and male bud may be degenerated or persistent
 """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.11"
+    g:section "6.4.11"
     .
 
-gpo:rachisPositionMusa a rdf:Property;
+g:rachisPositionMusa a rdf:Property;
     rdfs:label "Rachis position"@en;
     rdfs:comment """
 1 Falling vertically
@@ -696,13 +703,13 @@ gpo:rachisPositionMusa a rdf:Property;
 4 Horizontal
 5 Erect
 """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/rachisPosition.png>;
-    gpo:section "6.4.12"
+    g:section "6.4.12"
     .
 
-gpo:rachisAppearanceMusa a rdf:Property;
+g:rachisAppearanceMusa a rdf:Property;
     rdfs:label "Rachis appearance"@en;
     rdfs:comment """
 1 Bare
@@ -717,12 +724,12 @@ whole stalk)
 male bud (e.g. ABB var. ‘Monthan’)
 7 Other (specify in descriptor 6.8, Notes)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.13"
+    g:section "6.4.13"
     .
 
-gpo:maleBudTypeMusa a rdf:Property;
+g:maleBudTypeMusa a rdf:Property;
     rdfs:label "Male bud type"@en;
     rdfs:comment """
 Recorded at maturity
@@ -730,12 +737,12 @@ Recorded at maturity
 2 Degenerating before maturity (like false-horn ‘Plantain’)
 3 Like true-horn ‘Plantain’ (absent)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.14"
+    g:section "6.4.14"
     .
 
-gpo:maleBudShapeMusa a rdf:Property;
+g:maleBudShapeMusa a rdf:Property;
     rdfs:label "Male bud shape"@en;
     rdfs:comment """
 Note the general shape of the male bud at harvest.
@@ -745,13 +752,13 @@ Note the general shape of the male bud at harvest.
 4 Ovoid
 5 Rounded
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/maleBudShape.png>;
-    gpo:section "6.4.15"
+    g:section "6.4.15"
     .
 
-gpo:maleBudSizeMusa a rdf:Property;
+g:maleBudSizeMusa a rdf:Property;
     rdfs:label "Male bud size"@en;
     rdfs:comment """
 Length and maximum diameter of male bud at harvest
@@ -759,26 +766,26 @@ Length and maximum diameter of male bud at harvest
 2 21 to 30 cm
 3 ≥31 cm
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.4.16"
+    g:section "6.4.16"
     .
 
 
-gpo:bractBaseShapeMusa a rdf:Property;
+g:bractBaseShapeMusa a rdf:Property;
     rdfs:label "Bract base shape"@en;
     rdfs:comment """
 1 Small shoulder
 2 Medium
 3 Large shoulder
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/bractBaseShapeMusa.png>;
-    gpo:section "6.5.1"
+    g:section "6.5.1"
     .
 
-gpo:bractApexShapeMusa a rdf:Property;
+g:bractApexShapeMusa a rdf:Property;
     rdfs:label "Bract apex shape"@en;
     rdfs:comment """
 Flatten the apex of the bract to observe its shape.
@@ -788,13 +795,13 @@ Flatten the apex of the bract to observe its shape.
 4 Obtuse
 5 Obtuse and split
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/bractApexShapeMusa.png>;
-    gpo:section "6.5.2"
+    g:section "6.5.2"
     .
 
-gpo:bractImbricationMusa a rdf:Property;
+g:bractImbricationMusa a rdf:Property;
     rdfs:label "Bract imbrication"@en;
     rdfs:comment """
 Note alignment of bracts at the apex of the male bud
@@ -802,13 +809,13 @@ Note alignment of bracts at the apex of the male bud
 2 Young bracts slightly overlap
 3 Young bracts greatly overlap (like Musa acuminata subsp. burmanicca)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.5.3"
+    g:section "6.5.3"
     .
 
 
-gpo:colourOfTheBractExternalFaceMusa a rdf:Property;
+g:colourOfTheBractExternalFaceMusa a rdf:Property;
     rdfs:label "Colour of the bract external face"@en;
     rdfs:comment """
 1 Yellow 
@@ -822,12 +829,12 @@ gpo:colourOfTheBractExternalFaceMusa a rdf:Property;
 9 Orange-red
 10 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.5.4"
+    g:section "6.5.4"
     .
 
-gpo:colourOfTheBractInternalFaceMusa a rdf:Property;
+g:colourOfTheBractInternalFaceMusa a rdf:Property;
     rdfs:label "Colour of the bract internal face"@en;
     rdfs:comment """
 1 Whitish
@@ -839,72 +846,72 @@ gpo:colourOfTheBractInternalFaceMusa a rdf:Property;
 7 Pink-purple
 8 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.5.5"
+    g:section "6.5.5"
     .
 
-gpo:colourOnTheBractApexMusa a rdf:Property;
+g:colourOnTheBractApexMusa a rdf:Property;
     rdfs:label "Colour on the bract apex"@en;
     rdfs:comment """
 Recorded on the external face of the bract
 1 Tinted with yellow (discoloured)
 2 Not tinted with yellow (colour is uniform until apex)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.5.6"
+    g:section "6.5.6"
     .
 
-gpo:colourStripesOnBractMusa a rdf:Property;
+g:colourStripesOnBractMusa a rdf:Property;
     rdfs:label "Colour stripes on bract"@en;
     rdfs:comment """
 1 Without discoloured lines (not ridges) on the external face
 2 With discoloured lines or stripes on the external face
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.5.7"
+    g:section "6.5.7"
     .
 
-gpo:bractScarsOnRachisMusa a rdf:Property;
+g:bractScarsOnRachisMusa a rdf:Property;
     rdfs:label "Bract scars on rachis"@en;
     rdfs:comment """
 Recorded on scars left after fall of bracts and flowers
 1 Very prominent
 2 Not prominent
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.5.8"
+    g:section "6.5.8"
     .
 
-gpo:fadingOfColourOnBractBaseMusa a rdf:Property;
+g:fadingOfColourOnBractBaseMusa a rdf:Property;
     rdfs:label "Fading of colour on bract base"@en;
     rdfs:comment """
 Observed on the inside of the bract
 1 Colour discontinuing towards the base (loss of pigmentation at the base)
 2 Colour homogenous (pigmentation is uniform and continues until the base)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.5.9"
+    g:section "6.5.9"
     .
 
-gpo:maleBractShapeMusa a rdf:Property;
+g:maleBractShapeMusa a rdf:Property;
     rdfs:label "Male bract shape"@en;
     rdfs:comment """
 1 x/y < 0.28 (Lanceolate)
 2 0.28 < x/y <0.30
 3 x/y > 0.30 (Ovate)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/maleBractShapeMusa.png>;
-    gpo:section "6.5.10"
+    g:section "6.5.10"
     .
 
-gpo:maleBractLiftingMusa a rdf:Property;
+g:maleBractLiftingMusa a rdf:Property;
     rdfs:label "Male bract lifting"@en;
     rdfs:comment """
 Number of raised bracts present on the male bud
@@ -912,25 +919,25 @@ Number of raised bracts present on the male bud
 2 Lifting one at a time
 3 Lifting two or more at a time
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.5.11"
+    g:section "6.5.11"
     .
 
-gpo:bractBehaviourBeforeFallingMusa a rdf:Property;
+g:bractBehaviourBeforeFallingMusa a rdf:Property;
     rdfs:label "Bract behaviour before falling"@en;
     rdfs:comment """
 1 Revolute (rolling)
 2 Not revolute (not rolling)
 Fig. 13 Bract behaviour before falling
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/bractBehaviourBeforeFallingMusa.png>;
-    gpo:section "6.5.12"
+    g:section "6.5.12"
     .
 
-gpo:waxOnTheBractMusa a rdf:Property;
+g:waxOnTheBractMusa a rdf:Property;
     rdfs:label "Wax on the bract"@en;
     rdfs:comment """
 Recorded on the external surface
@@ -939,12 +946,12 @@ Recorded on the external surface
 3 Moderately waxy
 4 Very waxy
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.5.13"
+    g:section "6.5.13"
     .
 
-gpo:presenceOfGroovesOnTheBractMusa a rdf:Property;
+g:presenceOfGroovesOnTheBractMusa a rdf:Property;
     rdfs:label "Presence of grooves on the bract"@en;
     rdfs:comment """
 Observed on the external surface
@@ -952,13 +959,13 @@ Observed on the external surface
 2 Moderate grooving (parallel ridges are distinguishable)
 3 Strongly grooved (deep parallel furrows on the surface of bract)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.5.14"
+    g:section "6.5.14"
     .
 
 
-gpo:maleFlowerBehaviourMusa a rdf:Property;
+g:maleFlowerBehaviourMusa a rdf:Property;
     rdfs:label "Male flower behaviour"@en;
     rdfs:comment """
 1 Falling before the bract
@@ -966,13 +973,13 @@ gpo:maleFlowerBehaviourMusa a rdf:Property;
 3 Falling after the bract
 4 Neutral/male flowers persistent
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/maleFlowerMusa.png>;
-    gpo:section "6.6.1"
+    g:section "6.6.1"
     .
 
-gpo:compoundTepalBasicColourMusa a rdf:Property;
+g:compoundTepalBasicColourMusa a rdf:Property;
     rdfs:label "Compound tepal basic colour"@en;
     rdfs:comment """
 Without considering lobe colour.
@@ -983,24 +990,24 @@ Without considering lobe colour.
 5 Pink/pink-purple
 6 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.2"
+    g:section "6.6.2"
     .
 
-gpo:compoundTepalPigmentationMusa a rdf:Property;
+g:compoundTepalPigmentationMusa a rdf:Property;
     rdfs:label "Compound tepal pigmentation"@en;
     rdfs:comment """
 1 Very few or no visible sign of pigmentation
 2 Rust-coloured spots
 3 Presence of pink
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.3"
+    g:section "6.6.3"
     .
 
-gpo:lobeColourOfCompoundTepalMusa a rdf:Property;
+g:lobeColourOfCompoundTepalMusa a rdf:Property;
     rdfs:label "Lobe colour of compound tepal"@en;
     rdfs:comment """
 1 Cream
@@ -1009,24 +1016,24 @@ gpo:lobeColourOfCompoundTepalMusa a rdf:Property;
 4 Green
 5 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.4"
+    g:section "6.6.4"
     .
 
-gpo:lobeDevelopmentOfCompoundTepalMusa a rdf:Property;
+g:lobeDevelopmentOfCompoundTepalMusa a rdf:Property;
     rdfs:label "Lobe development of compound tepal"@en;
     rdfs:comment """
 1 Little or not visible sign of development
 2 Developed
 3 Very developed
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.5"
+    g:section "6.6.5"
     .
 
-gpo:freeTepalColourMusa a rdf:Property;
+g:freeTepalColourMusa a rdf:Property;
     rdfs:label "Free tepal colour"@en;
     rdfs:comment """
 1 Translucent white
@@ -1034,12 +1041,12 @@ gpo:freeTepalColourMusa a rdf:Property;
 3 Tinted with yellow
 4 Tinted with pink
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.6"
+    g:section "6.6.6"
     .
 
-gpo:freeTepalShapeMusa a rdf:Property;
+g:freeTepalShapeMusa a rdf:Property;
     rdfs:label "Free tepal shape"@en;
     rdfs:comment """
 1 Rectangular
@@ -1047,50 +1054,50 @@ gpo:freeTepalShapeMusa a rdf:Property;
 3 Rounded
 4 Fan-shaped
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.7"
+    g:section "6.6.7"
     .
 
-gpo:freeTepalAppearanceMusa a rdf:Property;
+g:freeTepalAppearanceMusa a rdf:Property;
     rdfs:label "Free tepal appearance"@en;
     rdfs:comment """
 1 Simple folding under apex
 2 More or less smooth
 3 Several folding under apex (corrugated)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.8"
+    g:section "6.6.8"
     .
 
  
-gpo:freeTepalApexDevelopmentMusa a rdf:Property;
+g:freeTepalApexDevelopmentMusa a rdf:Property;
     rdfs:label "Free tepal apex development"@en;
     rdfs:comment """
 1 Little or no visible sign of development
 2 Developed
 3 Very developed
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/freeTepalApexDevelopmentMusa.png>;
-    gpo:section "6.6.9"
+    g:section "6.6.9"
     .
 
-gpo:freeTepalApexShapeMusa a rdf:Property;
+g:freeTepalApexShapeMusa a rdf:Property;
     rdfs:label "Free tepal apex shape"@en;
     rdfs:comment """
 1 Thread-like
 2 Triangular
 3 Obtuse
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.10"
+    g:section "6.6.10"
     .
 
-gpo:antherExsertionMusa a rdf:Property;
+g:antherExsertionMusa a rdf:Property;
     rdfs:label "Anther exsertion"@en;
     rdfs:comment """
 In relation to the base of the lobes on the compound tepal
@@ -1098,24 +1105,24 @@ In relation to the base of the lobes on the compound tepal
 2 Same level
 3 Inserted
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.11"
+    g:section "6.6.11"
     .
 
-gpo:filamentColourMusa a rdf:Property;
+g:filamentColourMusa a rdf:Property;
     rdfs:label "Filament colour"@en;
     rdfs:comment """
 1 White
 2 Cream
 3 Yellow
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.12"
+    g:section "6.6.12"
     .
 
-gpo:antherColourMusa a rdf:Property;
+g:antherColourMusa a rdf:Property;
     rdfs:label "Anther colour"@en;
     rdfs:comment """
 Observed on the face opposite to the dehiscence split of the anther (dorsal face).
@@ -1128,12 +1135,12 @@ Observed on the face opposite to the dehiscence split of the anther (dorsal face
 7 Black (anthers aborted)
 8 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.13"
+    g:section "6.6.13"
     .
 
-gpo:pollenSacColourMusa a rdf:Property;
+g:pollenSacColourMusa a rdf:Property;
     rdfs:label "Pollen sac colour"@en;
     rdfs:comment """
 Recorded at the line where the anther splits to release pollen. 
@@ -1145,23 +1152,23 @@ Recorded at the line where the anther splits to release pollen.
 6 Red-purple
 7 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.14"
+    g:section "6.6.14"
     .
 
-gpo:pollenVitalityMusa a rdf:Property;
+g:pollenVitalityMusa a rdf:Property;
     rdfs:label "Pollen vitality"@en;
     rdfs:comment """
 Percentage of deformed and/or aborted grains in relation to normal grains. Use
 Alexander’s pollen viability assessment method
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.15"
+    g:section "6.6.15"
     .
 
-gpo:styleBasicColourMusa a rdf:Property;
+g:styleBasicColourMusa a rdf:Property;
     rdfs:label "Style basic colour"@en;
     rdfs:comment """
 Do not refer to the minute blotches which can be present on the style
@@ -1170,23 +1177,23 @@ Do not refer to the minute blotches which can be present on the style
 3 Red-purple
 4 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.16"
+    g:section "6.6.16"
     .
 
-gpo:pigmentationOnStyleMusa a rdf:Property;
+g:pigmentationOnStyleMusa a rdf:Property;
     rdfs:label "Pigmentation on style"@en;
     rdfs:comment """
 1 Without pigmentation
 2 Purple
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.17"
+    g:section "6.6.17"
     .
 
-gpo:styleExsertionMusa a rdf:Property;
+g:styleExsertionMusa a rdf:Property;
     rdfs:label "Style exsertion"@en;
     rdfs:comment """
 In relation to the base of the lobes on the compound tepal
@@ -1194,12 +1201,12 @@ In relation to the base of the lobes on the compound tepal
 2 Same level
 3 Inserted
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.18"
+    g:section "6.6.18"
     .
 
-gpo:styleShapeMusa a rdf:Property;
+g:styleShapeMusa a rdf:Property;
     rdfs:label "Style shape"@en;
     rdfs:comment """
 1 Straight 
@@ -1208,12 +1215,12 @@ gpo:styleShapeMusa a rdf:Property;
 4 Curved twice
 5 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/styleShapeMusa.png>;
-    gpo:section "6.6.19"
+    g:section "6.6.19"
     .
-gpo:stigmaColourMusa a rdf:Property;
+g:stigmaColourMusa a rdf:Property;
     rdfs:label "Stigma colour"@en;
     rdfs:comment """
 1 Cream
@@ -1223,24 +1230,24 @@ gpo:stigmaColourMusa a rdf:Property;
 5 Orange
 6 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.20"
+    g:section "6.6.20"
     .
 
-gpo:ovaryShapeMusa a rdf:Property;
+g:ovaryShapeMusa a rdf:Property;
     rdfs:label "Ovary shape"@en;
     rdfs:comment """
 1 Straight
 2 Arched
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/ovaryShapeMusa.png>;
-    gpo:section "6.6.21"
+    g:section "6.6.21"
     .
 
-gpo:ovaryBasicColourMusa a rdf:Property;
+g:ovaryBasicColourMusa a rdf:Property;
     rdfs:label "Ovary basic colour"@en;
     rdfs:comment """
 1 White 
@@ -1249,23 +1256,23 @@ gpo:ovaryBasicColourMusa a rdf:Property;
 4 Green
 5 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.22"
+    g:section "6.6.22"
     .
 
-gpo:ovaryPigmentationMusa a rdf:Property;
+g:ovaryPigmentationMusa a rdf:Property;
     rdfs:label "Ovary pigmentation"@en;
     rdfs:comment """
 1 Very few or no visible sign of pigmentation
 2 With red-purple
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.23"
+    g:section "6.6.23"
     .
 
-gpo:dominantColourOfMaleFlowerMusa a rdf:Property;
+g:dominantColourOfMaleFlowerMusa a rdf:Property;
     rdfs:label "Dominant colour of male flower"@en;
     rdfs:comment """
 1 White 
@@ -1275,24 +1282,24 @@ gpo:dominantColourOfMaleFlowerMusa a rdf:Property;
 5 Red-purple
 6 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.24"
+    g:section "6.6.24"
     .
 
  
-gpo:irregularFlowersMusa a rdf:Property;
+g:irregularFlowersMusa a rdf:Property;
     rdfs:label "Irregular flowers"@en;
     rdfs:comment """
 Record number of flowers per cluster with an abnormal number of stamens, fusion
 of free and compound tepal, etc.
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.6.25"
+    g:section "6.6.25"
     .
 
-gpo:arrangementOfOvulesMusa a rdf:Property;
+g:arrangementOfOvulesMusa a rdf:Property;
     rdfs:label "Arrangement of ovules"@en;
     rdfs:comment """
 Observed soon after flowering and before the fruit fills. Observe a cross-section of
@@ -1300,13 +1307,13 @@ a fruit.
 1 Two rowed
 2 Four-rowed (more or less)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/arrangementOfOvulesMusa.png>;
-    gpo:section "6.6.26"
+    g:section "6.6.26"
     .
 
-gpo:fruitPositionMusa a rdf:Property;
+g:fruitPositionMusa a rdf:Property;
     rdfs:label "Fruit position"@en;
     rdfs:comment """
 Recorded only on fruits arranged symmetrically around the stalk
@@ -1316,12 +1323,12 @@ Recorded only on fruits arranged symmetrically around the stalk
 4 Perpendicular to the stalk
 5 Pendant
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.1"
+    g:section "6.7.1"
     .
 
-gpo:numberOfFruitsMusa a rdf:Property;
+g:numberOfFruitsMusa a rdf:Property;
     rdfs:label "Number of fruits"@en;
     rdfs:comment """
 Observed on the mid-hand of the bunch
@@ -1329,12 +1336,12 @@ Observed on the mid-hand of the bunch
 2 13-16
 3 ≥17
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.2"
+    g:section "6.7.2"
     .
 
-gpo:fruitLengthMusa a rdf:Property;
+g:fruitLengthMusa a rdf:Property;
     rdfs:label "Fruit length"@en;
     rdfs:comment """
 Measured as the internal arc of the fruit, without pedicel
@@ -1344,12 +1351,12 @@ Measured as the internal arc of the fruit, without pedicel
 4 26- 30 cm
 5 ≥31 cm
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.3"
+    g:section "6.7.3"
     .
 
-gpo:fruitShapeLongitudinalCurvatureMusa a rdf:Property;
+g:fruitShapeLongitudinalCurvatureMusa a rdf:Property;
     rdfs:label "Fruit shape longitudinal curvature"@en;
     rdfs:comment """
 1 Straight (or slightly curved)
@@ -1358,13 +1365,13 @@ gpo:fruitShapeLongitudinalCurvatureMusa a rdf:Property;
 4 Curved in ‘S’ shape (double curvature)
 5 Other (specify in descriptor Notes, 6.8)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/fruitShapeLongitudinalCurvatureMusa.png>;
-    gpo:section "6.7.4"
+    g:section "6.7.4"
     .
 
-gpo:transverseSectionOfFruitMusa a rdf:Property;
+g:transverseSectionOfFruitMusa a rdf:Property;
     rdfs:label "Transverse section of fruit"@en;
     rdfs:comment """
 Observed on mature fruit (‘ready to eat’ - ripe but not over-ripe, full yellow stage).
@@ -1372,12 +1379,12 @@ Observed on mature fruit (‘ready to eat’ - ripe but not over-ripe, full yell
 2 Slightly ridged
 3 Rounded
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/transverseSectionOfFruitMusa.png>;
-    gpo:section "6.7.5"
+    g:section "6.7.5"
     .
-gpo:fruitApexMusa a rdf:Property;
+g:fruitApexMusa a rdf:Property;
     rdfs:label "Fruit apex"@en;
     rdfs:comment """
 Observed at the distal end of the fruit. 
@@ -1387,13 +1394,13 @@ Observed at the distal end of the fruit.
 4 Bottle-necked
 5 Rounded
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/fruitApexMusa.png>;
-    gpo:section "6.7.6"
+    g:section "6.7.6"
     .
 
-gpo:remainsOfFlowerRelictsAtFruitApexMusa a rdf:Property;
+g:remainsOfFlowerRelictsAtFruitApexMusa a rdf:Property;
     rdfs:label "Remains of flower relicts at fruit apex"@en;
     rdfs:comment """
 Observed at the distal end of the fruit. 
@@ -1401,48 +1408,48 @@ Observed at the distal end of the fruit.
 2 Persistent style
 3 Base of the style prominent
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
     foaf:depiction <http://www.agrobiodiversity.org/files/remainsOfFlowerRelictsAtFruitApexMusa.png>;
-    gpo:section "6.7.7"
+    g:section "6.7.7"
     .
 
-gpo:fruitPedicelLengthMusa a rdf:Property;
+g:fruitPedicelLengthMusa a rdf:Property;
     rdfs:label "Fruit pedicel length"@en;
     rdfs:comment """
 1 ≤10 mm
 2 11 to 20 mm
 3 ≥21 mm
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.8"
+    g:section "6.7.8"
     .
 
-gpo:fruitPedicelWidthMusa a rdf:Property;
+g:fruitPedicelWidthMusa a rdf:Property;
     rdfs:label "Fruit pedicel width"@en;
     rdfs:comment """
 1 <5 mm
 2 5 to 10 mm
 3 >10 mm
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.9"
+    g:section "6.7.9"
     .
 
-gpo:pedicelSurfaceMusa a rdf:Property;
+g:pedicelSurfaceMusa a rdf:Property;
     rdfs:label "Pedicel surface"@en;
     rdfs:comment """
 1 Hairless
 2 Hairy
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.10"
+    g:section "6.7.10"
     .
 
-gpo:fusionOfPedicelsMusa a rdf:Property;
+g:fusionOfPedicelsMusa a rdf:Property;
     rdfs:label "Fusion of pedicels"@en;
     rdfs:comment """
 (Before joining the crown)
@@ -1450,12 +1457,12 @@ gpo:fusionOfPedicelsMusa a rdf:Property;
 2 Partially fused
 3 Totally fused
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.11"
+    g:section "6.7.11"
     .
 
-gpo:immatureFruitPeelColourMusa a rdf:Property;
+g:immatureFruitPeelColourMusa a rdf:Property;
     rdfs:label "Immature fruit peel colour"@en;
     rdfs:comment """
 Recorded on the youngest hand of the bunch, before maturity. 
@@ -1470,12 +1477,12 @@ Recorded on the youngest hand of the bunch, before maturity.
 9 Black
 10 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.12"
+    g:section "6.7.12"
     .
 
-gpo:matureFruitPeelColourMusa a rdf:Property;
+g:matureFruitPeelColourMusa a rdf:Property;
     rdfs:label "Mature fruit peel colour"@en;
     rdfs:comment """
 Recorded at fruit maturity (ripe, but not over-ripe; full yellow stage). 
@@ -1489,59 +1496,59 @@ Recorded at fruit maturity (ripe, but not over-ripe; full yellow stage).
 8 Black
 9 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.13"
+    g:section "6.7.13"
     .
 
-gpo:fruitPeelThicknessMusa a rdf:Property;
+g:fruitPeelThicknessMusa a rdf:Property;
     rdfs:label "Fruit peel thickness"@en;
     rdfs:comment """
 Recorded at fruit maturity (‘ready to eat’ ripe, but not over-ripe; full yellow stage)
 1 Two or less
 2 Three or more
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.14"
+    g:section "6.7.14"
     .
 
-gpo:adherenceOfTheFruitPeelMusa a rdf:Property;
+g:adherenceOfTheFruitPeelMusa a rdf:Property;
     rdfs:label "Adherence of the fruit peel"@en;
     rdfs:comment """
 Recorded at fruit maturity (ripe, but not over-ripe; full yellow stage)
 1 Fruit peels easily
 2 Fruit does not peel easily
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.15"
+    g:section "6.7.15"
     .
 
-gpo:cracksInFruitPeelMusa a rdf:Property;
+g:cracksInFruitPeelMusa a rdf:Property;
     rdfs:label "Cracks in fruit peel"@en;
     rdfs:comment """
 Recorded at fruit maturity if the peel splits without mechanical damage
 1 Without cracks
 2 Cracked
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.16"
+    g:section "6.7.16"
     .
 
-gpo:pulpInFruitMusa a rdf:Property;
+g:pulpInFruitMusa a rdf:Property;
     rdfs:label "Pulp in fruit"@en;
     rdfs:comment """
 1 Without pulp
 2 With pulp
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.17"
+    g:section "6.7.17"
     .
 
-gpo:pulpColourBeforeMaturityMusa a rdf:Property;
+g:pulpColourBeforeMaturityMusa a rdf:Property;
     rdfs:label "Pulp colour before maturity"@en;
     rdfs:comment """
 Recorded on youngest hand of the bunch. 
@@ -1553,12 +1560,12 @@ Recorded on youngest hand of the bunch.
 6 Beige-pink
 7 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.18"
+    g:section "6.7.18"
     .
 
-gpo:pulpColourAtMaturityMusa a rdf:Property;
+g:pulpColourAtMaturityMusa a rdf:Property;
     rdfs:label "Pulp colour at maturity"@en;
     rdfs:comment """
 (Ripe, but not over-ripe; full yellow stage)
@@ -1570,34 +1577,34 @@ gpo:pulpColourAtMaturityMusa a rdf:Property;
 6 Beige-pink
 7 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.19"
+    g:section "6.7.19"
     .
 
-gpo:fruitsFallFromHandsMusa a rdf:Property;
+g:fruitsFallFromHandsMusa a rdf:Property;
     rdfs:label "Fruits fall from hands"@en;
     rdfs:comment """
 Observed at fruit maturity
 1 Persistent
 2 Deciduous
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.20"
+    g:section "6.7.20"
     .
-gpo:fleshTextureMusa a rdf:Property;
+g:fleshTextureMusa a rdf:Property;
     rdfs:label "Flesh texture"@en;
     rdfs:comment """
 1 Firm
 2 Soft
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.21"
+    g:section "6.7.21"
     .
 
-gpo:predominantTasteMusa a rdf:Property;
+g:predominantTasteMusa a rdf:Property;
     rdfs:label "Predominant taste"@en;
     rdfs:comment """
 1 Astringent (like cooking banana)
@@ -1607,12 +1614,12 @@ gpo:predominantTasteMusa a rdf:Property;
 5 Sweet and acidic (apple like)
 6 Other
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.22"
+    g:section "6.7.22"
     .
 
-gpo:presenceOfSeedWithSourceOfPollenMusa a rdf:Property;
+g:presenceOfSeedWithSourceOfPollenMusa a rdf:Property;
     rdfs:label "Presence of seed with source of pollen"@en;
     rdfs:comment """
 Record the number of seeds only if there exists in the vicinity of the plant a
@@ -1622,23 +1629,23 @@ flowers are artificially pollinated
 2 5-20
 3 >20
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.23"
+    g:section "6.7.23"
     .
 
-gpo:seedSurfaceMusa a rdf:Property;
+g:seedSurfaceMusa a rdf:Property;
     rdfs:label "Seed surface"@en;
     rdfs:comment """
 1 Smooth
 2 Wrinkled
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.24"
+    g:section "6.7.24"
     .
 
-gpo:seedShapeMusa a rdf:Property;
+g:seedShapeMusa a rdf:Property;
     rdfs:label "Seed shape"@en;
     rdfs:comment """
 1 Flat
@@ -1646,8 +1653,8 @@ gpo:seedShapeMusa a rdf:Property;
 3 Globular (spherical)
 4 Rounded (but not completely spherical)
     """@en;
-    rdfs:domain gpo:Musa;
+    rdfs:domain g:Musa;
     rdfs:range xsd:string;
-    gpo:section "6.7.25"
+    g:section "6.7.25"
     .
 
