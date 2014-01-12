@@ -8,6 +8,7 @@
 @prefix book: <http://purl.org/NET/book/vocab#> .
 @prefix dwcg: <http://purl.org/germplasm/germplasmTerm#> .
 @prefix event: <http://purl.org/NET/c4dm/event.owl#> .
+@prefix wo: <http://purl.org/ontology/wo/> .
    
 g: a owl:Ontology ;
       dc:created "2013/12/20 12:00:00";
@@ -41,6 +42,16 @@ g:Mission a owl:Class;
     rdfs:label "Mission";
     rdfs:comment "Mission event for collecting an accession";
     rdfs:subClassOf event:Event
+    .
+
+g:Genus a owl:Class;
+    rdfs:subClassOf wo:Genus;
+    rdfs:subClassOf <http://dbpedia.org/ontology/Species>
+    .
+
+g:Species a owl:Class;
+    rdfs:subClassOf wo:Species;
+    rdfs:subClassOf <http://dbpedia.org/ontology/Species>
     .
 
 g:instCode a owl:ObjectProperty;
@@ -98,3 +109,18 @@ g:collectingMission a owl:ObjectProperty;
     rdfs:range g:Mission
     .
     
+g:genus a owl:ObjectProperty;
+    g:mcpdTerm "GENUS";
+    rdfs:label "genus";
+    rdfs:comment "Associates a GermplasmAccession with a Genus";
+    rdfs:domain g:GermplasmAccession;
+    rdfs:range g:Genus
+    .
+    
+g:species a owl:ObjectProperty;
+    g:mcpdTerm "SPECIES";
+    rdfs:label "species";
+    rdfs:comment "Associates a GermplasmAccession with a Species";
+    rdfs:domain g:GermplasmAccession;
+    rdfs:range g:Species
+    .
